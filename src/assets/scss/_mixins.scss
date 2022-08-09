@@ -1,0 +1,7 @@
+@mixin pixelated {
+  image-rendering: pixelated;
+}
+@mixin box {
+  border: 1px solid;
+  padding: 1rem;
+}
