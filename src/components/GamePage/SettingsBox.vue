@@ -1,6 +1,8 @@
 <template>
   <div class="settings-box">
     <button class="logout" @click="logout()">Log Out</button>
+    <span class="username" v-if="store.portfolio">Logged in as: {{store.portfolio.username}}</span>
+    <span class="username" v-else>Loading...</span>
   </div>
 </template>
 
@@ -10,10 +12,10 @@ import {useRouter} from "vue-router";
 
 const router = useRouter()
 const store = useUserStore();
-const logout = () => {
+const logout = async () => {
   try {
-    store.signOut();
-    router.push("/login")
+    await store.signOut();
+    await router.push("/login")
   } catch (e) {
     alert(e)
   }
@@ -33,6 +35,10 @@ const logout = () => {
       background-color: white;
       color: black;
     }
+  }
+  .username {
+    font-size: 1.5rem;
+    margin-left: 1.5rem;
   }
 }
 </style>

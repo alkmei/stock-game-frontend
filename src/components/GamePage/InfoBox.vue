@@ -1,33 +1,60 @@
 <template>
   <div class="info-box">
-    <table class="fixed_header">
+    <table class="fixed_header" v-if="ready">
       <thead>
       <tr>
         <th>Ranking</th>
-        <th>ID</th>
         <th>Name</th>
         <th>Money</th>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="n in 5">
-        <td>{{ n }}</td>
-        <td>{{ n }}</td>
-        <td>{{ n }}</td>
-        <td>{{ n }}</td>
+      <tr v-for="n in data">
+        <td>{{ n.id }}</td>
+        <td>{{ n.username }}</td>
+        <td>{{ this.$formatter.format(n.money/100) }}</td>
       </tr>
       </tbody>
     </table>
+    <span class="loading" v-else>Loading...</span>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import axios from "axios"
+import {ref} from "vue";
+
+const ready = ref(false)
+const data = ref([])
+
+interface dataValue {
+  username: string,
+  money: number
+}
+
+async function setup() {
+  await axios.get(`${import.meta.env.VITE_BACKEND_URL}/portfolios/leaderboard`).then((res) => {
+    data.value = res.data.map((x: dataValue, index: number) => {
+      return {
+        id: index + 1,
+        ...x
+      }
+    })
+    ready.value = true
+  })
+}
+
+setup()
 </script>
 
 <style scoped lang="scss">
 .info-box {
   height: 100%;
   border: 1px solid;
+  .loading {
+    font-size: 3rem;
+    margin-left: 5rem;
+  }
   .fixed_header {
     width: 100%;
     height: 100%;

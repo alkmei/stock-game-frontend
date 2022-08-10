@@ -14,4 +14,8 @@ app.use(router)
 
 useUserStore().checkIn()
 
+app.config.globalProperties.$formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+});
 app.mount('#app')
