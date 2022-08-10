@@ -41,6 +41,7 @@ export const useUserStore = defineStore({
             })
                 .then((res) => {
                     this.portfolio = res.data
+                    console.log(this.user)
                 })
         },
         checkIn() {

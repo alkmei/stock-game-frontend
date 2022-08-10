@@ -1,7 +1,7 @@
 <template>
   <div class="settings-box">
     <button class="logout" @click="logout()">Log Out</button>
-    <span class="username" v-if="store.portfolio">Logged in as: {{store.portfolio.username}}</span>
+    <span class="username" v-if="store.portfolio">Logged in as: {{store.user?.user_metadata.username}}</span>
     <span class="username" v-else>Loading...</span>
   </div>
 </template>
