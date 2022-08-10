@@ -77,8 +77,7 @@ export default{
 
     }
     .stock-info{
-      display:flex;
-      flex-direction:row;
+
       font-size:1.5rem;
       align-items: center;
       .stock-element{
