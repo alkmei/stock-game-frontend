@@ -71,6 +71,7 @@ export default{
       tr{
         td{
           font-size: 1.5rem;
+          padding-left: 2.5rem;
           text-transform: capitalize;
         }
       }
