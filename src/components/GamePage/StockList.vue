@@ -57,8 +57,7 @@ export default{
     .top-header {
       display: table-header-group;
       .top-header-row {
-        display: flex;
-        justify-content: space-evenly;
+
         
         th {
           text-decoration: underline 1px;
