@@ -1,24 +1,46 @@
 <template>
 <div class="stock-list-window">
-  <div class="stock-list-wrapper">
-    <div class="top-header">
-      <div class="top-header-row">
-        <span>Name</span>
-        <span>Ticker</span>
-        <span>Price</span>
-        <span>Highest Today</span>
-        <span>Lowest Today</span>
-      </div>
-    </div>
+  <table class="stock-list-wrapper">
+    <thead class="top-header">
+      <tr class="top-header-row">
+        <th>Name</th>
+        <th>Ticker</th>
+        <th>Price</th>
+        <th>High</th>
+        <th>Low</th>
+      </tr>
+    </thead>
+      <tbody class="stock-list">
+        <tr
+          v-for="(x) in store.stocks" 
+          :key=store.stocks.ticker 
+          >
+          <td>{{x.name}}</td>
+          <td>{{x.ticker}}</td>
+          <td>{{x.price}}</td>
+          <td>{{x.today_max}}</td> 
+          <td>{{x.today_min}}</td>
+        </tr>
+    </tbody>
+  </table>
+
+  <div class="stock-info-wrapper" >
+      
   </div>
-  <div class="stock-info-wrapper"></div>
 </div>
 </template>
 
-<script setup>
+<script lang="ts">
 import {useStockStore} from "@/stores/stocks";
-const store = useStockStore()
-store.getStocks()
+export default{
+  setup(){ 
+    const store = useStockStore()
+    store.getStocks()
+
+    return{store}
+  }
+}
+
 </script>
 
 <style scoped lang="scss">
@@ -32,18 +54,50 @@ store.getStocks()
   .stock-list-wrapper {
     @include box;
     display: table;
-    .top-row {
+    .top-header {
       display: table-header-group;
       .top-header-row {
-        display: table-row;
-        span {
-          display: table-cell;
+        display: flex;
+        justify-content: space-evenly;
+        
+        th {
+          text-decoration: underline 1px;
+          text-underline-offset: 1px;
+          font-size:1.5rem;
         }
       }
     }
+    .stock-list{
+      padding-top:1rem;
+      tr{
+        td{
+          font-size: 1.5rem;
+          text-transform: capitalize;
+        }
+      }
+
+    }
+    .stock-info{
+      display:flex;
+      flex-direction:row;
+      font-size:1.5rem;
+      align-items: center;
+      .stock-element{
+        padding-left: 1rem;
+      }
+    }
+
   }
+  
   .stock-info-wrapper {
-    @include box
+    @include box;
+
+
+  
   }
+  
 }
+
+
+
 </style>

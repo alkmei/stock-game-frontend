@@ -7,14 +7,14 @@ const backend_url = import.meta.env.VITE_BACKEND_URL
 
 interface UserState {
     user: User | null,
-    session: Session| null
+    session: Session| null,
 }
 
 export const useUserStore = defineStore({
     id: 'counter',
     state: (): UserState => ({
         user: null,
-        session: null
+        session: null,
     }),
     actions: {
         checkIn() {
