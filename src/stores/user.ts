@@ -1,6 +1,9 @@
 import { defineStore } from 'pinia'
 import supabase from "@/supabase";
-import type { User, Session } from "@supabase/supabase-js";
+import type { User, Session } from "@supabase/supabase-js"
+import axios from "axios"
+
+const backend_url = import.meta.env.VITE_BACKEND_URL
 
 interface UserState {
     user: User | null,
@@ -41,6 +44,13 @@ export const useUserStore = defineStore({
             if (error) throw error;
             this.user = user;
             this.session = session;
+            if (typeof this.session == null) throw error;
+            await axios.post(`${backend_url}/portfolios`, {}, {
+                headers: {
+                    //@ts-ignore
+                    "Authorization": `Bearer ${this.session.access_token}`
+                }
+            })
         },
         async signOut() {
             const {error} = await supabase.auth.signOut();
