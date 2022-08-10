@@ -14,6 +14,7 @@
 <script setup>
 import VueApexCharts from "vue3-apexcharts"
 import {useStockStore} from "@/stores/stocks";
+
 const store = useStockStore()
 const chartOptions = {
   chart: {
@@ -30,11 +31,11 @@ const chartOptions = {
     theme: "dark"
   },
 };
-store.getPrices("PAPR")
+// store.getPrices("PAPR")
 
-window.setInterval(() => {
-  store.getPrices("PAPR")
-}, 60000)
+// window.setInterval(() => {
+//   store.getPrices("PAPR")
+// }, 60000)
 </script>
 
 <style scoped>
