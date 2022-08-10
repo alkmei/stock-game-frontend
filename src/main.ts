@@ -7,6 +7,10 @@ import router from './router'
 
 import './assets/scss/main.scss'
 
+
+import Particles from "particles.vue3"
+
+
 const app = createApp(App)
 
 app.use(createPinia())
@@ -18,4 +22,4 @@ app.config.globalProperties.$formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
 });
-app.mount('#app')
+app.use(Particles).mount('#app')
