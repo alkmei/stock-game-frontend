@@ -51,9 +51,10 @@ setup()
 .info-box {
   height: 100%;
   border: 1px solid;
+  display: flex;
+  justify-content: center;
   .loading {
     font-size: 3rem;
-    margin-left: 5rem;
   }
   .fixed_header {
     width: 100%;

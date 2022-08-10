@@ -1,6 +1,6 @@
 <template>
 <div class="stock-list-window">
-  <table class="stock-list-wrapper">
+  <table class="stock-list-wrapper" v-if="store.stocks.length > 0">
     <thead class="top-header">
       <tr class="top-header-row">
         <th>Name</th>
@@ -12,28 +12,36 @@
     </thead>
       <tbody class="stock-list">
         <tr
-          v-for="(x) in store.stocks" 
-          :key=store.stocks.ticker 
+          v-for="(x) in store.stocks"
+          :key=store.stocks.ticker
+          @click="store.setStock(x.ticker)"
+          :class="{selected : store.selectedStock === x.ticker}"
           >
           <td>{{x.name}}</td>
           <td>{{x.ticker}}</td>
-          <td>{{x.price}}</td>
-          <td>{{x.today_max}}</td> 
-          <td>{{x.today_min}}</td>
+          <td>{{this.$formatter.format(x.price)}}</td>
+          <td>{{this.$formatter.format(x.today_max)}}</td>
+          <td>{{this.$formatter.format(x.today_min)}}</td>
         </tr>
     </tbody>
   </table>
-
-  <div class="stock-info-wrapper" >
-      
+  <div class="loading" v-else>
+    Loading...
   </div>
+  <div class="stock-info-wrapper" v-if="store.stocks.length > 0 && store.selectedStock">
+    <StockInfo/>
+  </div>
+
+
 </div>
 </template>
 
 <script lang="ts" setup>
+import StockInfo from "./StockInfo.vue"
 import {useStockStore} from "@/stores/stocks";
 const store = useStockStore()
 store.getStocks()
+window.setInterval(store.getStocks, 60000)
 </script>
 
 <style scoped lang="scss">
@@ -44,6 +52,9 @@ store.getStocks()
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  .loading {
+    font-size: 3rem;
+  }
   .stock-list-wrapper {
     width: 100%;
     height: 100%;
@@ -57,6 +68,15 @@ store.getStocks()
       overflow-y: scroll;
       height: 19.5rem;
       border-top: 1px solid;
+      .selected {
+        background-color: #00000099;
+      }
+      tr {
+        &:hover {
+          cursor: pointer;
+          background-color: #00000033;
+        }
+      }
     }
     thead {
       tr {
@@ -74,6 +94,7 @@ store.getStocks()
 
 .stock-info-wrapper {
   @include box
+
 }
 
 </style>

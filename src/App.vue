@@ -19,6 +19,6 @@ import { RouterView } from 'vue-router'
   right: 0;
   background: url("./assets/nick-chong-N__BnvQ_w18-unsplash.jpg");
   background-size: cover;
-  filter: brightness(50%);
+  filter: brightness(30%);
 }
 </style>

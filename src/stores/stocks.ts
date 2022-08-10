@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia'
+import {useUserStore} from "@/stores/user";
+import {getCurrentInstance} from "vue";
 import axios from "axios";
 
 const backend_url = import.meta.env.VITE_BACKEND_URL
@@ -36,10 +38,45 @@ export const useStockStore = defineStore({
     id: 'stocks',
     state: (): stockState => ({
         stocks: [],
-        selectedStock: "null",
+        selectedStock: null,
         prices: []
     }),
     actions: {
+        async createTransaction(type: string, amount: number) {
+            await axios.post(`${backend_url}/transactions/`, {
+                transaction: {
+                    type: type,
+                    ticker: this.selectedStock,
+                    amount: amount
+                },
+                req: {
+                    ticker: this.selectedStock
+                }
+            }, {
+                headers: {
+                    "Authorization": `Bearer ${useUserStore()?.session?.access_token}`
+                }
+            }).then(async () => {
+                await useUserStore().loadPortfolio()
+            })
+        },
+        async setStock(ticker: string) {
+            this.selectedStock = ticker
+            await axios.post(`${backend_url}/stocks/`, {
+                ticker: ticker,
+                qtype: "today"
+            }).then((res) => {
+                this.prices = res.data.map((x: number) => x/100)
+            })
+        },
+        async getStockNow(ticker: string) {
+            await axios.post(`${backend_url}/stocks/`, {
+                ticker: ticker,
+                qtype: "now"
+            }).then((res) => {
+                this.prices.push(res.data[0]/100)
+            })
+        },
         async getStocks() {
             const stock_info = await axios.get(`${backend_url}/stocks/`)
             const stock_prices = await axios.get(`${backend_url}/stocks/prices`)
@@ -55,7 +92,10 @@ export const useStockStore = defineStore({
                     today_min: ele.today_min / 100
                 })
             })
-            this.stocks = list
+            this.stocks = list.sort((a, b) => {
+                if (a.id < b.id) return -1;
+                return 1
+            })
             console.log(this.stocks)
         },
     }

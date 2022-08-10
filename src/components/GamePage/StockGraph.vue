@@ -7,7 +7,8 @@
                    :series="[{
                      name: store.selectedStock,
                      data: store.prices
-                   }]"/>
+                   }]"  v-if="store.selectedStock"/>
+    <span v-else>Select Stock</span>
   </div>
 </template>
 
@@ -31,13 +32,16 @@ const chartOptions = {
     theme: "dark"
   },
 };
-// store.getPrices("PAPR")
 
-// window.setInterval(() => {
-//   store.getPrices("PAPR")
-// }, 60000)
+window.setInterval(() => {
+  if (store.selectedStock) {
+    store.getStockNow(store.selectedStock)
+  }
+}, 60000)
 </script>
 
 <style scoped>
-
+span {
+  font-size: 5rem;
+}
 </style>
