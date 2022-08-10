@@ -10,11 +10,11 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="n in 100">
-        <td>row {{ n }}-0</td>
-        <td>row {{ n }}-1</td>
-        <td>row {{ n }}-2</td>
-        <td>row {{ n }}-3</td>
+      <tr v-for="n in 5">
+        <td>{{ n }}</td>
+        <td>{{ n }}</td>
+        <td>{{ n }}</td>
+        <td>{{ n }}</td>
       </tr>
       </tbody>
     </table>
@@ -22,8 +22,6 @@
 </template>
 
 <script setup>
-import axios from "axios"
-axios.get()
 </script>
 
 <style scoped lang="scss">
@@ -35,16 +33,15 @@ axios.get()
     height: 100%;
     table-layout: fixed;
     border-collapse: collapse;
+    display: grid;
+    grid-template-rows: 3rem 1fr;
     tbody {
-      display: block;
       width: 100%;
-      overflow: auto;
-      height: 49.5rem;
-      border-top: 1px solid
+      height: 60rem;
+      overflow-y: auto;
+      border-top: 1px solid;
     }
     thead {
-      background: black;
-      color:#fff;
       tr {
         display: block;
       }
