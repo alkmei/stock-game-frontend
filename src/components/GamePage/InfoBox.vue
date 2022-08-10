@@ -12,7 +12,7 @@
       <tr v-for="n in data">
         <td>{{ n.id }}</td>
         <td>{{ n.username }}</td>
-        <td>{{ this.$formatter.format(n.money/100) }}</td>
+        <td>{{ this.$formatter.format(n.money) }}</td>
       </tr>
       </tbody>
     </table>
