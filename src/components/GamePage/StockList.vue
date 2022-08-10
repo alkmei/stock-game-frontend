@@ -68,10 +68,12 @@ export default{
     }
     .stock-list{
       padding-top:1rem;
+      
       tr{
+        
         td{
+          text-align: center;
           font-size: 1.5rem;
-          padding-left: 2.5rem;
           text-transform: capitalize;
         }
       }
