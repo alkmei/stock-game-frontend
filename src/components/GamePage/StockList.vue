@@ -30,17 +30,10 @@
 </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {useStockStore} from "@/stores/stocks";
-export default{
-  setup(){ 
-    const store = useStockStore()
-    store.getStocks()
-
-    return{store}
-  }
-}
-
+const store = useStockStore()
+store.getStocks()
 </script>
 
 <style scoped lang="scss">
@@ -52,53 +45,35 @@ export default{
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
   .stock-list-wrapper {
-    @include box;
-    display: table;
-    .top-header {
-      display: table-header-group;
-      .top-header-row {
-
-        
-        th {
-          text-decoration: underline 1px;
-          text-underline-offset: 1px;
-          font-size:1.5rem;
-        }
+    width: 100%;
+    height: 100%;
+    table-layout: fixed;
+    border: 1px solid;
+    border-collapse: collapse;
+    display: grid;
+    grid-template-rows: 3rem 1fr;
+    tbody {
+      width: 100%;
+      overflow-y: scroll;
+      height: 19.5rem;
+      border-top: 1px solid;
+    }
+    thead {
+      tr {
+        display: block;
       }
     }
-    .stock-list{
-      padding-top:1rem;
-      
-      tr{
-        
-        td{
-          text-align: center;
-          font-size: 1.5rem;
-          text-transform: capitalize;
-        }
-      }
-
+    th, td {
+      padding: 5px;
+      text-align: center;
+      width: 20rem;
+      font-size: 1.5rem;
     }
-    .stock-info{
-
-      font-size:1.5rem;
-      align-items: center;
-      .stock-element{
-        padding-left: 1rem;
-      }
-    }
-
   }
-  
-  .stock-info-wrapper {
-    @include box;
-
-
-  
-  }
-  
 }
 
-
+.stock-info-wrapper {
+  @include box
+}
 
 </style>
