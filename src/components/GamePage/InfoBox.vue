@@ -1,7 +1,5 @@
 <template>
   <div class="info-box">
-
-
     <table class="fixed_header">
       <thead>
       <tr>
@@ -20,12 +18,12 @@
       </tr>
       </tbody>
     </table>
-
-
   </div>
 </template>
 
 <script setup>
+import axios from "axios"
+axios.get()
 </script>
 
 <style scoped lang="scss">
