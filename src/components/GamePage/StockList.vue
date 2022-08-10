@@ -68,7 +68,9 @@ store.getStocks()
       text-align: center;
       width: 20rem;
       font-size: 1.5rem;
+      text-transform: capitalize;
     }
+
   }
 }
 
