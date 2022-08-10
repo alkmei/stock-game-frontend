@@ -1,10 +1,16 @@
 <template>
-  <div class="money-counter">$100,000,000,000.00</div>
+  <div class="money-counter">$</div>
 </template>
 
-<script>
+<script lang-="ts">
+import {useUserStore} from '@/stores/user.ts'
 export default {
-  name: "MoneyCounter"
+  name: "MoneyCounter",
+  setup(){
+    const store = useUserStore()
+    return{store}
+  }
+
 }
 </script>
 
