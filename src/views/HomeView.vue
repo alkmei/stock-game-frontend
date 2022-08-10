@@ -33,7 +33,10 @@ if (!useUserStore().user && !useUserStore().session) {
 main {
   display: grid;
   grid-template-columns: 0.4fr 1fr;
-  height: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  padding: 1rem;
   gap: 1rem;
   .left {
     display: grid;

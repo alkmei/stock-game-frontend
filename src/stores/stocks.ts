@@ -56,6 +56,7 @@ export const useStockStore = defineStore({
                 })
             })
             this.stocks = list
+            console.log(this.stocks)
         },
     }
 })
