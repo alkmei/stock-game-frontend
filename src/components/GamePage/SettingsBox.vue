@@ -1,6 +1,7 @@
 <template>
   <div class="settings-box">
-    <button class="logout" @click="logout()">Log Out</button>
+    <button class="button" @click="logout()">Log Out</button>
+    <button class="button" @click="portButton()">Portfolio</button>
     <span class="username" v-if="store.portfolio">Logged in as: {{store.portfolio.username}}</span>
     <span class="username" v-else>Loading...</span>
   </div>
@@ -19,18 +20,21 @@ const logout = async () => {
   } catch (e) {
     alert(e)
   }
-
+}
+const portButton = () => {
+  router.push("/portfolio")
 }
 </script>
 
 <style scoped lang="scss">
 .settings-box {
   @include box;
-  .logout {
+  .button {
     @include box;
     font-size: 1.3rem;
     background-color: transparent;
     color: white;
+    margin-right: 1rem;
     &:hover {
       background-color: white;
       color: black;
@@ -38,7 +42,6 @@ const logout = async () => {
   }
   .username {
     font-size: 1.5rem;
-    margin-left: 1.5rem;
   }
 }
 </style>
