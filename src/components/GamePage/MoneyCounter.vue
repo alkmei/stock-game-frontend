@@ -1,6 +1,6 @@
 <template>
   <div class="money-counter">
-    <span v-if="store.portfolio">{{formatter.format(store.portfolio.money)}}</span>
+    <span v-if="store.portfolio">{{formatter.format(store.portfolio.money/100)}}</span>
     <span v-else>Loading...</span>
   </div>
 </template>
