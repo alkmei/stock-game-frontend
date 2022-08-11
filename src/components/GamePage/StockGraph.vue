@@ -20,7 +20,10 @@ const store = useStockStore()
 const chartOptions = {
   chart: {
     id: "stock-graph",
-    foreColor: "#fff"
+    foreColor: "#fff",
+  },
+  title:{
+    text:'Time is in UTC'
   },
   stroke: {
     width: 1,
