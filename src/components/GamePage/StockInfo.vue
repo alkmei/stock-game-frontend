@@ -18,10 +18,10 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import {useUserStore} from "@/stores/user";
 import {useStockStore} from "@/stores/stocks";
-import {ref, watch} from "vue";
+import {ref} from "vue";
 
 const amount = ref("0")
 const store = useUserStore()

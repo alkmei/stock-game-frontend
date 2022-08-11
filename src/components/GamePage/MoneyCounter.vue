@@ -1,6 +1,6 @@
 <template>
   <div class="money-counter">
-    <span v-if="store.portfolio">{{this.$formatter.format(store.portfolio.money)}}</span>
+    <span v-if="store.portfolio">{{formatter.format(store.portfolio.money)}}</span>
     <span v-else>Loading...</span>
   </div>
 </template>
@@ -8,6 +8,10 @@
 <script lang="ts" setup>
 import {useUserStore} from '@/stores/user'
 const store = useUserStore()
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+})
 </script>
 
 <style scoped lang="scss">

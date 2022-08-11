@@ -12,7 +12,7 @@
       <tr v-for="n in data">
         <td>{{ n.id }}</td>
         <td>{{ n.username }}</td>
-        <td>{{ this.$formatter.format(n.money) }}</td>
+        <td>{{ formatter.format(n.money) }}</td>
       </tr>
       </tbody>
     </table>
@@ -26,6 +26,10 @@ import {ref} from "vue";
 
 const ready = ref(false)
 const data = ref([])
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+})
 
 interface dataValue {
   username: string,

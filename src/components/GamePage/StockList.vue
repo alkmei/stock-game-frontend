@@ -13,15 +13,15 @@
       <tbody class="stock-list">
         <tr
           v-for="(x) in store.stocks"
-          :key=store.stocks.ticker
+          :key=x.ticker
           @click="store.setStock(x.ticker)"
           :class="{selected : store.selectedStock === x.ticker}"
           >
           <td>{{x.name}}</td>
           <td>{{x.ticker}}</td>
-          <td>{{this.$formatter.format(x.price)}}</td>
-          <td>{{this.$formatter.format(x.today_max)}}</td>
-          <td>{{this.$formatter.format(x.today_min)}}</td>
+          <td>{{formatter.format(x.price)}}</td>
+          <td>{{formatter.format(x.today_max)}}</td>
+          <td>{{formatter.format(x.today_min)}}</td>
         </tr>
     </tbody>
   </table>
@@ -40,6 +40,10 @@
 import StockInfo from "./StockInfo.vue"
 import {useStockStore} from "@/stores/stocks";
 const store = useStockStore()
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+})
 store.getStocks()
 window.setInterval(store.getStocks, 60000)
 </script>

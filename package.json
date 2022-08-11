@@ -15,8 +15,7 @@
     "sass": "^1.54.0",
     "vue": "^3.2.37",
     "vue-router": "^4.1.2",
-    "vue3-apexcharts": "^1.4.1",
-    "vue3-easy-data-table": "^1.4.12"
+    "vue3-apexcharts": "^1.4.1"
   },
   "devDependencies": {
     "@types/node": "^16.11.45",
