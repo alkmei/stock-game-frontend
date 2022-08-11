@@ -1,9 +1,10 @@
+import { storeToRefs } from 'pinia'
 <template>
   <div class="container">
     <button @click="homeButton()">Home</button>
-    <div class="welcome-user">Welcome to your portfolio, {{store.portfolio.username}}!</div>
+    <div class="welcome-user">Welcome to your portfolio, {{userStore.portfolio.username}}!</div>
     <div class="money">
-      Buying Power: ${{store.portfolio.money / 100}}
+      Buying Power: ${{userStore.portfolio.money / 100}}
     </div>
       <table class="stock-list-wrapper">
         <thead class="top-header">
@@ -11,13 +12,15 @@
             <th>Ticker</th>
             <th>Bought</th>
             <th>Shorted</th>
+            <th>Equity</th>
           </tr>
         </thead>
           <tbody class="stock-list">
-            <tr v-for="(x) in store.portfolio.stocks">
+            <tr v-for="(x) in userStore.portfolio.stocks" >
               <td>{{x.ticker}}</td>
               <td>{{x.bought}}</td>
               <td>{{x.shorted}}</td>
+              <td>{{}}</td>
             </tr>
         </tbody>
       </table>
@@ -27,17 +30,22 @@
 
 <script lang="ts">
 import {useUserStore} from '@/stores/user'
+import {useStockStore} from '@/stores/stocks'
 import router from '@/router'
 export default {
 
   name: "PortfolioView",
 
   setup(){
-    const store = useUserStore()
+    const userStore = useUserStore()
+    const stockStore = useStockStore()
     const homeButton = () => {
       router.push("/")
     }
-    return{store, homeButton}
+
+
+
+    return{userStore, stockStore, homeButton}
 
   }
 
