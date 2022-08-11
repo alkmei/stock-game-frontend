@@ -27,10 +27,21 @@ interface stockCombined {
     today_min: number
 }
 
+interface transactionHistory{
+    id: number
+    created_at: string
+    user_id: string
+    ticker: string
+    type:string
+    amount: number
+    trans_price: number
+}
+
 interface stockState {
     stocks: stockCombined[]
     selectedStock: string | null
     prices: number[]
+    transactions: transactionHistory[] 
 }
 
 
@@ -39,7 +50,8 @@ export const useStockStore = defineStore({
     state: (): stockState => ({
         stocks: [],
         selectedStock: null,
-        prices: []
+        prices: [],
+        transactions: [],
     }),
     actions: {
         async createTransaction(type: string, amount: number) {
@@ -96,7 +108,16 @@ export const useStockStore = defineStore({
                 if (a.id < b.id) return -1;
                 return 1
             })
-            console.log(this.stocks)
         },
+        async getTransactions(){
+            await axios.get(`${backend_url}/transactions/me`, {
+                headers: {
+                    "Authorization": `Bearer ${useUserStore()?.session?.access_token}`
+                }
+            }).then((res) => {
+                this.transactions = res.data
+            })
+        },
+
     }
 })

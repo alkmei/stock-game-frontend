@@ -38,6 +38,7 @@ const portButton = () => {
     &:hover {
       background-color: white;
       color: black;
+      cursor:pointer;
     }
   }
   .username {
