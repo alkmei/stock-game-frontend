@@ -13,6 +13,7 @@ import { storeToRefs } from 'pinia'
             <th>Ticker</th>
             <th>Bought</th>
             <th>Shorted</th>
+            <th>Equity</th>
           </tr>
         </thead>
           <tbody class="stock-list">
@@ -42,7 +43,7 @@ import { storeToRefs } from 'pinia'
               <td>${{x.trans_price/100}}</td>
               <td>
                 {{new Date(x.created_at).getMonth()}}/{{new Date(x.created_at).getDate()}}/{{new Date(x.created_at).getFullYear()}}
-                {{new Date(x.created_at).getHours()}}:{{new Date(x.created_at).getMinutes()}}
+                {{new Date(x.created_at).getHours()}}:{{new Date(x.created_at).getMinutes().toString().padStart(2, "0")}}
               </td>
             </tr>
         </tbody>
