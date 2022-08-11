@@ -1,4 +1,5 @@
 import { storeToRefs } from 'pinia'
+import { storeToRefs } from 'pinia'
 <template>
   <div class="container">
     <button @click="homeButton()">Home</button>
@@ -24,8 +25,26 @@ import { storeToRefs } from 'pinia'
             </tr>
         </tbody>
       </table>
-  </div>
 
+      <table class="stock-list-wrapper">
+        <thead class="top-header">
+          <tr class="top-header-row">
+            <th>Ticker</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+          <tbody class="stock-list">
+            <tr v-for="(x) in stockStore.transactions" >
+              <td>{{x.ticker}}</td>
+              <td>{{x.type}}</td>
+              <td>{{}}</td>
+              <td>${{x.trans_price/100}}</td>
+            </tr>
+        </tbody>
+      </table>
+  </div>
 </template>
 
 <script lang="ts">
@@ -39,6 +58,11 @@ export default {
   setup(){
     const userStore = useUserStore()
     const stockStore = useStockStore()
+    try{
+      stockStore.getTransactions()
+    } catch{
+
+    }
     const homeButton = () => {
       router.push("/")
     }
@@ -74,7 +98,7 @@ export default {
     border-collapse: collapse;
     display: grid;
     grid-template-rows: 3rem 1fr;
-    
+    margin-bottom: 4rem;
     tbody {
       width: 100%;
       overflow-y: scroll;
