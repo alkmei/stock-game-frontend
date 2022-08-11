@@ -29,9 +29,11 @@ interface stockCombined {
 
 interface transactionHistory{
     id: number
+    created_at: string
+    user_id: string
     ticker: string
     type:string
-    user_id: string
+    amount: number
     trans_price: number
 }
 
@@ -106,7 +108,6 @@ export const useStockStore = defineStore({
                 if (a.id < b.id) return -1;
                 return 1
             })
-            console.log(this.stocks)
         },
         async getTransactions(){
             await axios.get(`${backend_url}/transactions/me`, {
@@ -115,7 +116,6 @@ export const useStockStore = defineStore({
                 }
             }).then((res) => {
                 this.transactions = res.data
-                console.log(this.transactions)
             })
         },
 
