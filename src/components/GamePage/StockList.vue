@@ -71,7 +71,7 @@ window.setInterval(store.getStocks, 60000)
       width: 100%;
       overflow-y: scroll;
       height: 19.5rem;
-      border-top: 1px solid;
+      border-top: 2px solid;
       .selected {
         background-color: #00000099;
       }
